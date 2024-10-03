@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><!--th:replace="~{fragments/navbar.html :: header( title = 'Productos')}"-->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+          crossorigin="anonymous">
+    <title>Lista de Eventos</title>
+
+</head>
+<body>
+<div class="container">
+    <!--<nav th:replace="~{fragments/navbar.html :: navbar( active = 'Product')}"></nav> -->
+    <div th:insert="~{fragments/header :: head}"></div>
+    <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+            <h2 th:text="${eventos.id==0? 'Nuevo Evento':'Editar Evento'}">Editar Evento</h2>
+            <hr/>
+            <div class="alert alert-danger" role="alert" th:if="${msg != null}" th:text="${msg}">
+                A simple success alert—check it out!
+            </div>
+            <form method="post" th:action="@{'/eventos/save'}" th:object="${eventos}">
+                <input th:field="*{id}" type="hidden"/>
+                <div class="mb-3">
+                    <label class="form-label">Nombre del Evento</label>
+                    <input th:field="*{nombre}" type="text" class="form-control"
+                           th:classappend="${#fields.hasErrors('nombre')?'is-invalid':''}"/>
+                    <div id="validationServer03Feedback" class="invalid-feedback"
+                         th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">
+                        Mensaje de error de nombre
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Fecha del evento</label>
+                    <input th:field="*{fecha}" type="date" th:class="${#fields.hasErrors('fecha')?'form-control is-invalid':'form-control'}"/>
+                    <div class="invalid-feedback"
+                         th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">
+                        Mensaje de error de fecha
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Número de asistentes esperados</label>
+                    <input th:field="*{asistentesEsperados}" type="number" th:class="${#fields.hasErrors('asistentesEsperados')?'form-control is-invalid':'form-control'}"/>
+                    <div class="invalid-feedback"
+                         th:if="${#fields.hasErrors('asistentesEsperados')}" th:errors="*{asistentesEsperados}">
+                        Mensaje de error de asistentes
+                    </div>
+                </div>
+
+
+                <a th:href="@{'/eventos/lista'}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-primary"
+                        th:text="${eventos.id==0? 'Guardar':'Actualizar'}">Actualizar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+</body>
+</html>

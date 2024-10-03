@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head><!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+          crossorigin="anonymous">
+    <title>Lista Artistas</title>
+</head>
+<body>
+<div class="container">
+
+    <div th:insert="~{fragments/header :: head}"></div>
+    <div class="container px-4 py-5">
+        <h2>Lista de artistas</h2>
+
+        <div class="d-flex mt-3 mb-4">
+            <a class="btn btn-primary" th:href="@{'/artistas/nuevo'}">Crear Artista</a>
+
+        </div>
+        <!--
+            <form method="post" th:action="@{/buscarEmpleado}">
+                <div class="input-group mb-3">
+                    <input name="searchField" class="form-control" type="text" placeholder="Buscar por nombre" th:value="${textoBuscado}" >
+                    <button class="btn btn-outline-primary" type="submit">Buscar</button>
+                    <a class="btn btn-outline-danger" th:href="@{'/employee'}">Limpiar</a>
+                </div>
+            </form>-->
+        <table class="table table-sm" >
+            <tr>
+                <th>#</th>
+                <th>Nombre de artista</th>
+                <th>genero</th>
+                <th>telefono</th>
+
+                <th></th>
+
+            </tr>
+            <tr th:each="eventos,obj: ${listaArtistas}">
+                <td th:text="${obj.index+1}"> </td>
+                <td th:text="${eventos.nombre}"></td>
+                <td th:text="${eventos.genero}"></td>
+                <td th:text="${eventos.telefono}"></td>
+                <td><a class="btn btn-primary" th:href="@{'/artistas/edit?id=' + ${eventos.id}}">Editar</a></td>
+                <!--
+                <td><a class="btn btn-primary" th:href="@{'/edit?id=' + ${employee.employeeId}}">Editar</a></td>
+                <td><a class="btn btn-danger" th:href="@{'/employee/delete?id=' + ${employee.employeeId}}">Borrar</a></td>
+                -->
+            </tr>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+            crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+<body>
+
+</body>
+</html>
